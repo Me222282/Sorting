@@ -1,0 +1,60 @@
+P:\Computer Science\Sorting\src\bin\Debug\net5.0\Sorting.exe
+P:\Computer Science\Sorting\src\bin\Debug\net5.0\Resources\SampleFont.png
+P:\Computer Science\Sorting\src\bin\Debug\net5.0\glfw\os64\libglfw.dylib
+P:\Computer Science\Sorting\src\bin\Debug\net5.0\glfw\os64\libglfw.so
+P:\Computer Science\Sorting\src\bin\Debug\net5.0\glfw\win64\glfw3.dll
+P:\Computer Science\Sorting\src\bin\Debug\net5.0\Layouts\test.xml
+P:\Computer Science\Sorting\src\bin\Debug\net5.0\Sorting.deps.json
+P:\Computer Science\Sorting\src\bin\Debug\net5.0\Sorting.runtimeconfig.json
+P:\Computer Science\Sorting\src\bin\Debug\net5.0\Sorting.runtimeconfig.dev.json
+P:\Computer Science\Sorting\src\bin\Debug\net5.0\Sorting.dll
+P:\Computer Science\Sorting\src\bin\Debug\net5.0\ref\Sorting.dll
+P:\Computer Science\Sorting\src\bin\Debug\net5.0\Sorting.pdb
+P:\Computer Science\Sorting\src\bin\Debug\net5.0\Graphics.dll
+P:\Computer Science\Sorting\src\bin\Debug\net5.0\GUI.dll
+P:\Computer Science\Sorting\src\bin\Debug\net5.0\Structs.dll
+P:\Computer Science\Sorting\src\bin\Debug\net5.0\Windowing.dll
+P:\Computer Science\Sorting\src\bin\Debug\net5.0\Structs.pdb
+P:\Computer Science\Sorting\src\bin\Debug\net5.0\Graphics.pdb
+P:\Computer Science\Sorting\src\bin\Debug\net5.0\Windowing.pdb
+P:\Computer Science\Sorting\src\bin\Debug\net5.0\GUI.pdb
+P:\Computer Science\Sorting\src\obj\Debug\net5.0\Sorting.csproj.AssemblyReference.cache
+P:\Computer Science\Sorting\src\obj\Debug\net5.0\Sorting.GeneratedMSBuildEditorConfig.editorconfig
+P:\Computer Science\Sorting\src\obj\Debug\net5.0\Sorting.AssemblyInfoInputs.cache
+P:\Computer Science\Sorting\src\obj\Debug\net5.0\Sorting.AssemblyInfo.cs
+P:\Computer Science\Sorting\src\obj\Debug\net5.0\Sorting.csproj.CoreCompileInputs.cache
+P:\Computer Science\Sorting\src\obj\Debug\net5.0\Sorting.csproj.CopyComplete
+P:\Computer Science\Sorting\src\obj\Debug\net5.0\Sorting.dll
+P:\Computer Science\Sorting\src\obj\Debug\net5.0\ref\Sorting.dll
+P:\Computer Science\Sorting\src\obj\Debug\net5.0\Sorting.pdb
+P:\Computer Science\Sorting\src\obj\Debug\net5.0\Sorting.genruntimeconfig.cache
+H:\Documents\Programming\code\Sorting\src\bin\Debug\net5.0\Sorting.exe
+H:\Documents\Programming\code\Sorting\src\bin\Debug\net5.0\Resources\SampleFont.png
+H:\Documents\Programming\code\Sorting\src\bin\Debug\net5.0\glfw\os64\libglfw.dylib
+H:\Documents\Programming\code\Sorting\src\bin\Debug\net5.0\glfw\os64\libglfw.so
+H:\Documents\Programming\code\Sorting\src\bin\Debug\net5.0\glfw\win64\glfw3.dll
+H:\Documents\Programming\code\Sorting\src\bin\Debug\net5.0\Layouts\test.xml
+H:\Documents\Programming\code\Sorting\src\bin\Debug\net5.0\Sorting.deps.json
+H:\Documents\Programming\code\Sorting\src\bin\Debug\net5.0\Sorting.runtimeconfig.json
+H:\Documents\Programming\code\Sorting\src\bin\Debug\net5.0\Sorting.runtimeconfig.dev.json
+H:\Documents\Programming\code\Sorting\src\bin\Debug\net5.0\Sorting.dll
+H:\Documents\Programming\code\Sorting\src\bin\Debug\net5.0\ref\Sorting.dll
+H:\Documents\Programming\code\Sorting\src\bin\Debug\net5.0\Sorting.pdb
+H:\Documents\Programming\code\Sorting\src\bin\Debug\net5.0\Graphics.dll
+H:\Documents\Programming\code\Sorting\src\bin\Debug\net5.0\GUI.dll
+H:\Documents\Programming\code\Sorting\src\bin\Debug\net5.0\Structs.dll
+H:\Documents\Programming\code\Sorting\src\bin\Debug\net5.0\Windowing.dll
+H:\Documents\Programming\code\Sorting\src\bin\Debug\net5.0\Structs.pdb
+H:\Documents\Programming\code\Sorting\src\bin\Debug\net5.0\Graphics.pdb
+H:\Documents\Programming\code\Sorting\src\bin\Debug\net5.0\Windowing.pdb
+H:\Documents\Programming\code\Sorting\src\bin\Debug\net5.0\GUI.pdb
+H:\Documents\Programming\code\Sorting\src\obj\Debug\net5.0\Sorting.csproj.AssemblyReference.cache
+H:\Documents\Programming\code\Sorting\src\obj\Debug\net5.0\Sorting.GeneratedMSBuildEditorConfig.editorconfig
+H:\Documents\Programming\code\Sorting\src\obj\Debug\net5.0\Sorting.AssemblyInfoInputs.cache
+H:\Documents\Programming\code\Sorting\src\obj\Debug\net5.0\Sorting.AssemblyInfo.cs
+H:\Documents\Programming\code\Sorting\src\obj\Debug\net5.0\Sorting.csproj.CoreCompileInputs.cache
+H:\Documents\Programming\code\Sorting\src\obj\Debug\net5.0\Sorting.csproj.CopyComplete
+H:\Documents\Programming\code\Sorting\src\obj\Debug\net5.0\Sorting.dll
+H:\Documents\Programming\code\Sorting\src\obj\Debug\net5.0\ref\Sorting.dll
+H:\Documents\Programming\code\Sorting\src\obj\Debug\net5.0\Sorting.pdb
+H:\Documents\Programming\code\Sorting\src\obj\Debug\net5.0\Sorting.genruntimeconfig.cache
