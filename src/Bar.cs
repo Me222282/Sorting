@@ -51,9 +51,12 @@ namespace Sorting
             {
                 offset = 1d;
             }
+            else if (this[Mods.Control])
+            {
+                offset = 10d;
+            }
             
             Value = Math.Clamp(Value + (e.DeltaY * offset), 1d, Layout.MaxValue);
-            Trig();
         }
         
         protected override void OnKeyDown(KeyEventArgs e)
@@ -70,17 +73,16 @@ namespace Sorting
             if (e[Keys.Down])
             {
                 Value = Math.Clamp(Value - offset, 1d, Layout.MaxValue);
-                Trig();
                 return;
             }
             if (e[Keys.Up])
             {
                 Value = Math.Clamp(Value + offset, 1d, Layout.MaxValue);
-                Trig();
                 return;
             }
         }
         
+        private const double _textSize = 20d;
         private readonly Font _font = SampleFont.GetInstance();
         private void OnRender(object sender, RenderArgs e)
         {
@@ -99,11 +101,27 @@ namespace Sorting
             
             //e.Context.Framebuffer.Clear(c);
             
-            // ROUNDED CORNERS!
-            e.Context.DrawRoundedBox(new Box(Vector2.Zero, Bounds.Size), c, 0.1);
+            Vector2 size = Bounds.Size;
+            size.Y *= Math.Clamp(Value, 1d, Layout.MaxValue) / Layout.MaxValue;
+            if (size.Y < 1d)
+            {
+                size.Y = 1d;
+            }
             
-            e.TextRenderer.Colour = new ColourF(0f, 0f, 0f);
-            e.Context.Model = Matrix4.CreateScale(20);
+            // ROUNDED CORNERS!
+            double radius = (0.1 * size.X) / Math.Min(size.X, size.Y);
+            double y = (size.Y - Bounds.Height) * 0.5;
+            e.Context.DrawRoundedBox(new Box((0d, y), size), c, radius);
+            
+            ColourF textColour = new ColourF(0f, 0f, 0f);
+            if (size.Y <= _textSize)
+            {
+                y += ((size.Y + _textSize) * 0.5) + 5d;
+                textColour = new ColourF(1f, 1f, 1f);
+            }
+            
+            e.TextRenderer.Colour = textColour;
+            e.Context.Model = Matrix4.CreateBox(new Box((0d, y), _textSize));
             e.TextRenderer.DrawCentred(e.Context, $"{Value:N0}", _font, 0, 0);
             //e.TextRenderer.DrawCentred(e.Context, $"{CurrentIndex}", _font, 0, 0);
         }

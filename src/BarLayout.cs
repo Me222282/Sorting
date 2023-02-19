@@ -59,7 +59,7 @@ namespace Sorting
             
             Bar e = (Bar)args.Element;
             
-            double scale = Math.Clamp(e.Value, 1d, MaxValue) / MaxValue;
+            double scale = 1d;//Math.Clamp(e.Value, 1d, MaxValue) / MaxValue;
             
             Vector2 pos = (_border + (x * e.Index), _border);
             Vector2 size = (x - _border, h * scale);
