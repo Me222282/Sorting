@@ -27,8 +27,6 @@ namespace Sorting
         }
         
         private BarContainer _barDisplay;
-        private readonly BarAnimator _animator = new BarAnimator();
-        private BarCollection _collection;
         
         private void LoadGUI()
         {
@@ -38,8 +36,6 @@ namespace Sorting
                 LoadXml(File.ReadAllText("Layouts/test.xml"));
                 
                 _barDisplay = RootElement.Find<BarContainer>();
-                _barDisplay.Animator = _animator;
-                _collection = new BarCollection(_barDisplay, _animator);
                 
                 Slider slider = RootElement.Find<Slider>();
                 slider.SliderPos += (_, v) =>
@@ -52,14 +48,14 @@ namespace Sorting
         private void OnTextInput(object sender, string e)
         {
             if (!double.TryParse(e, out double v) ||
-                v <= 0d || _collection.Overflow)
+                v <= 0d || _barDisplay.Children.Overflow)
             {
                 return;
             }
             
             Actions.Push(() =>
             {
-                _collection.AddChild(v);
+                _barDisplay.AddValue(v);
             });
         }
         
@@ -74,45 +70,45 @@ namespace Sorting
             }
             if (e[Keys.Delete])
             {
-                if (!_collection.AnimationsFinished) { return; }
+                if (!_barDisplay.Children.AnimationsFinished) { return; }
                 
                 IElement f = _barDisplay.Hande.Focus;
                 if (f is not Bar) { return; }
                 
-                _collection.RemoveChild(f.Properties.ElementIndex);
+                _barDisplay.RemoveAt(f.Properties.ElementIndex);
                 return;
             }
         }
         
         private void BubbleSortButton(object sender, EventArgs e)
         {
-            if (_collection == null || _collection.Overflow) { return; }
+            if (_barDisplay.Children.Overflow) { return; }
             
-            _collection.BubbleSort(false);
+            _barDisplay.Children.BubbleSort(false);
         }
         private void InsertionSortButton(object sender, EventArgs e)
         {
-            if (_collection == null || _collection.Overflow) { return; }
+            if (_barDisplay.Children.Overflow) { return; }
             
-            _collection.InsertionSort(false);
+            _barDisplay.Children.InsertionSort(false);
         }
         private void Randomise(object sender, EventArgs e)
         {
-            if (_collection == null || _collection.Overflow) { return; }
+            if (_barDisplay.Children.Overflow) { return; }
             
             Random r = new Random();
             
             for (int i = 0; i < 20; i++)
             {
-                int a = r.Next(_collection.Length);
-                int b = r.Next(_collection.Length);
+                int a = r.Next(_barDisplay.ChildCount);
+                int b = r.Next(_barDisplay.ChildCount);
                 
                 if (a == b)
                 {
-                    b = r.Next(_collection.Length);
+                    b = r.Next(_barDisplay.ChildCount);
                 }
                 
-                _collection.Swap(a, b);
+                _barDisplay.Children.Swap(a, b);
             }
         }
     }

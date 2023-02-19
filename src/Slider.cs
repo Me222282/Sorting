@@ -10,7 +10,7 @@ namespace Sorting
     {
         public Slider()
         {
-            Graphics = new Renderer(this);
+            Graphics = new LocalGraphics(this, OnRender);
             Layout = this;
         }
         
@@ -92,7 +92,8 @@ namespace Sorting
             get => MinValue.Lerp(MaxValue, _sliderPos);
             set => SliderPosition = (value - MinValue) / (MaxValue - MinValue);
         }
-
+        
+        private readonly Font _font = SampleFont.GetInstance();
         public override GraphicsManager Graphics { get; }
 
         private const double _barHeight = 20d;
@@ -128,6 +129,26 @@ namespace Sorting
                 SliderPosition = (MouseLocation.X / _sliderWidth) + 0.5;
             }
         }
+        private void OnRender(object sender, RenderArgs e)
+        {
+            //e.Context.Framebuffer.Clear(new Colour(240, 120, 90));
+            
+            // SLIDER
+            e.Context.DrawRoundedBox(
+                new Box(Vector2.Zero, (_sliderWidth, _sliderHeight)),
+                SliderColour,
+                0.5);
+            
+            // BAR
+            e.Context.DrawRoundedBox(
+                GetBar(),
+                Focused ? SelectColour : BarColour,
+                0.2);
+            
+            e.TextRenderer.Colour = new ColourF(1f, 1f, 1f);
+            e.Context.Model = Matrix4.CreateScale(15) * Matrix4.CreateTranslation(0, (_barHeight + 15) * -0.5);
+            e.TextRenderer.DrawCentred(e.Context, $"{Value:N1}", _font, 0, 0);
+        }
         
         private bool _fromMouse;
         protected override void OnMouseDown(MouseEventArgs e)
@@ -162,48 +183,6 @@ namespace Sorting
             {
                 SliderPosition += offset;
                 return;
-            }
-        }
-
-        private class Renderer : GraphicsManager<Slider>
-        {
-            public Renderer(Slider source)
-                : base(source)
-            {
-                
-            }
-            
-            private readonly Font _font = SampleFont.GetInstance();
-            private readonly BorderShader _shader = BorderShader.GetInstance();
-            
-            public override void OnRender(DrawManager context)
-            {
-                //e.Context.Framebuffer.Clear(new Colour(240, 120, 90));
-                
-                // SLIDER
-                _shader.ColourSource = ColourSource.UniformColour;
-                _shader.BorderWidth = 0d;
-                _shader.Size = (Source._sliderWidth, _sliderHeight);
-                _shader.Colour = Source.SliderColour;
-                _shader.Radius = 0.5;
-                
-                context.Shader = _shader;
-                context.Model = Matrix4.CreateScale(Source._sliderWidth, _sliderHeight);
-                context.View = Matrix4.Identity;
-                context.Projection = Projection;
-                context.Draw(Shapes.Square);
-                
-                // BAR
-                _shader.Size = (_barWidth, _barHeight);
-                _shader.Colour = Source.Focused ? Source.SelectColour : Source.BarColour;
-                _shader.Radius = 0.2;
-                
-                context.Model = Matrix4.CreateBox(Source.GetBar());
-                context.Draw(Shapes.Square);
-                
-                TextRenderer.Colour = new ColourF(1f, 1f, 1f);
-                TextRenderer.Model = Matrix4.CreateScale(15) * Matrix4.CreateTranslation(0, (_barHeight + 15) * -0.5);
-                TextRenderer.DrawCentred(context, $"{Source.Value:N1}", _font, 0, 0);
             }
         }
     }

@@ -10,7 +10,12 @@ namespace Sorting
     {
         public Bar()
         {
-            Graphics = new Renderer(this);
+            Graphics = new LocalGraphics(this, OnRender);
+        }
+        public Bar(double value)
+            : this()
+        {
+            Value = value;
         }
         
         public BarAnimator Animator { get; set; }
@@ -75,54 +80,32 @@ namespace Sorting
                 return;
             }
         }
-
-        private class Renderer : GraphicsManager<Bar>
+        
+        private readonly Font _font = SampleFont.GetInstance();
+        private void OnRender(object sender, RenderArgs e)
         {
-            public Renderer(Bar source)
-                : base(source)
+            ColourF c = Colour;
+            
+            if (Focused)
             {
-                
+                c = SelectColour;
+            }
+            if (Animator != null &&
+                (Animator.IndexA == CurrentIndex ||
+                Animator.IndexB == CurrentIndex))
+            {
+                c = MoveColour;
             }
             
-            private readonly Font _font = SampleFont.GetInstance();
-            private readonly BorderShader _shader = BorderShader.GetInstance();
+            //e.Context.Framebuffer.Clear(c);
             
-            public override void OnRender(DrawManager context)
-            {
-                ColourF c = Source.Colour;
-                
-                if (Source.Focused)
-                {
-                    c = Source.SelectColour;
-                }
-                if (Source.Animator != null &&
-                    (Source.Animator.IndexA == Source.CurrentIndex ||
-                    Source.Animator.IndexB == Source.CurrentIndex))
-                {
-                    c = Source.MoveColour;
-                }
-                
-                //e.Context.Framebuffer.Clear(c);
-                
-                // ROUNDED CORNERS!
-                _shader.ColourSource = ColourSource.UniformColour;
-                _shader.BorderWidth = 0d;
-                _shader.Size = Bounds.Size;
-                _shader.Colour = c;
-                _shader.BorderColour = new ColourF(0.5f, 0.5f, 0.5f);
-                _shader.Radius = 0.1;
-                
-                context.Shader = _shader;
-                context.Model = Matrix4.CreateScale(2d);
-                context.View = Matrix4.Identity;
-                context.Projection = Matrix4.Identity;
-                context.Draw(Shapes.Square);
-                
-                TextRenderer.Colour = new ColourF(0f, 0f, 0f);
-                TextRenderer.Model = Matrix4.CreateScale(20);
-                TextRenderer.DrawCentred(context, $"{Source.Value:N0}", _font, 0, 0);
-                //TextRenderer.DrawCentred(e.Context, $"{CurrentIndex}", _font, 0, 0);
-            }
+            // ROUNDED CORNERS!
+            e.Context.DrawRoundedBox(new Box(Vector2.Zero, Bounds.Size), c, 0.1);
+            
+            e.TextRenderer.Colour = new ColourF(0f, 0f, 0f);
+            e.Context.Model = Matrix4.CreateScale(20);
+            e.TextRenderer.DrawCentred(e.Context, $"{Value:N0}", _font, 0, 0);
+            //TextRenderer.DrawCentred(e.Context, $"{CurrentIndex}", _font, 0, 0);
         }
     }
 }
