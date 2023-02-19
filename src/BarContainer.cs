@@ -68,11 +68,9 @@ namespace Sorting
             
             public bool AnimationsFinished => _swaps.Count <= 0 && !_animator.Animating;
         
-            private bool _swapping = false;
+            private bool SwapStack => _swaps.Count > 0;
             private List<Vector2I> _swaps = new List<Vector2I>();
             private object _sRef = new object();
-            
-            private readonly List<Bar> _values = new List<Bar>();
             
             public bool Overflow => _swaps.Count > 100;
             
@@ -82,13 +80,12 @@ namespace Sorting
                 item.Animator = _animator;
                 item.Click += BarClick;
                 
-                _values.Add(item);
                 base.Add(item);
             }
             
             public override void RemoveAt(int index)
             {
-                if (index < 0 || index >= _values.Count)
+                if (index < 0 || index >= Length)
                 {
                     throw new IndexOutOfRangeException();
                 }
@@ -99,7 +96,6 @@ namespace Sorting
                     _swapIndex = -1;
                 }
                 
-                _values.RemoveAt(index);
                 Element e = this[index];
                 e.Click -= BarClick;
                 
@@ -108,12 +104,7 @@ namespace Sorting
             
             public new void Swap(int indexA, int indexB)
             {
-                Bar value = _values[indexA];
-                
-                _values[indexA] = _values[indexB];
-                _values[indexB] = value;
-                
-                if (!(_swapping || _animator.Animating))
+                if (!(SwapStack || _animator.Animating))
                 {
                     _animator.SwapBars(indexA, indexB);
                     return;
@@ -128,13 +119,7 @@ namespace Sorting
             {
                 base.Swap(swap.X, swap.Y);
                 
-                if (_swaps.Count <= 0)
-                {
-                    _swapping = false;
-                    return;
-                }
-                
-                _swapping = true;
+                if (!SwapStack) { return; }
                 
                 swap = _swaps[0];
                 lock (_sRef)

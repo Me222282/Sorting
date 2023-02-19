@@ -1,13 +1,24 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Zene.GUI;
 
 namespace Sorting
 {
     public static class Sort
     {
-        public static void BubbleSort(this BarContainer.ChildManager array, bool greater)
+        private static void Swap<T>(this T[] array, int a, int b)
         {
-            // Number of interations in pass of the sorting algorithm
+            T at = array[a];
+            array[a] = array[b];
+            array[b] = at;
+        }
+        
+        public static void BubbleSort(this BarContainer.ChildManager barReference, bool greater)
+        {
+            IElement[] array = barReference.ToArray();
+            
+            // Number of interations in each pass of the sorting algorithm
             int interationsInPass = array.Length - 1;
             
             // Determins wether the array is sorted
@@ -22,7 +33,7 @@ namespace Sorting
                 for (int i = 0; i < interationsInPass; i++)
                 {
                     // determin wether left is greater than, less than, or equal to right
-                    bool swap = array[i].Value > array[i + 1].Value;
+                    bool swap = ((Bar)array[i]).Value > ((Bar)array[i + 1]).Value;
                     if (greater)
                     {
                         swap = !swap;
@@ -32,6 +43,7 @@ namespace Sorting
                     if (!swap || (array[i] == array[i + 1])) { continue; }
                     
                     array.Swap(i, i + 1);
+                    barReference.Swap(i, i + 1);
                     // Swap was made - array isn't sorted
                     continuePass = true;
                 }
@@ -41,15 +53,17 @@ namespace Sorting
             }
         }
         
-        public static void InsertionSort(this BarContainer.ChildManager array, bool greater)
+        public static void InsertionSort(this BarContainer.ChildManager barReference, bool greater)
         {
+            IElement[] array = barReference.ToArray();
+            
             // Pass every index except 0
             for (int pass = 1; pass < array.Length; pass++)
             {
                 for (int i = pass - 1; i >= 0; i--)
                 {
                     // determin wether left is greater than, less than, or equal to right
-                    bool swap = array[i].Value > array[i + 1].Value;
+                    bool swap = ((Bar)array[i]).Value > ((Bar)array[i + 1]).Value;
                     if (greater)
                     {
                         swap = !swap;
@@ -60,6 +74,7 @@ namespace Sorting
                     
                     // pass needs
                     array.Swap(i, i + 1);
+                    barReference.Swap(i, i + 1);
                 }
             }
         }

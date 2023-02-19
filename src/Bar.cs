@@ -105,7 +105,7 @@ namespace Sorting
             e.TextRenderer.Colour = new ColourF(0f, 0f, 0f);
             e.Context.Model = Matrix4.CreateScale(20);
             e.TextRenderer.DrawCentred(e.Context, $"{Value:N0}", _font, 0, 0);
-            //TextRenderer.DrawCentred(e.Context, $"{CurrentIndex}", _font, 0, 0);
+            //e.TextRenderer.DrawCentred(e.Context, $"{CurrentIndex}", _font, 0, 0);
         }
     }
 }

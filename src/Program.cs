@@ -13,7 +13,7 @@ namespace Sorting
         {
             Core.Init();
             
-            Window w = new Program(800, 500, "BEANS!");
+            Window w = new Program(800, 500, "Sorting");
             w.RunMultithread();
             //w.Run();
             
