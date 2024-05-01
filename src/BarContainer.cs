@@ -19,6 +19,8 @@ namespace Sorting
             LayoutManager = Zene.GUI.LayoutManager.Empty;
         }
         
+        public double MaxValue { get; set; } = 100d;
+        
         public BarLayout ChildLayout { get; }
         public override ChildManager Children { get; }
         public int ChildCount => Children.Length;

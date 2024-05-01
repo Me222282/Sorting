@@ -8,10 +8,11 @@ namespace Sorting
     {
         public BarLayout(double mv, double b)
         {
-            MaxValue = mv;
+            //MaxValue = mv;
             Border = b;
         }
         
+        /*
         private double _maxValue = 100d;
         public double MaxValue
         {
@@ -24,7 +25,7 @@ namespace Sorting
                 
                 InvokeChange();
             }
-        }
+        }*/
         
         private double _border = 5d;
         public double Border

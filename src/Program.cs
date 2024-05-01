@@ -35,12 +35,12 @@ namespace Sorting
                 RootElement.ClearChildren();
                 LoadXml(File.ReadAllText("Layouts/test.xml"));
                 
-                _barDisplay = RootElement.Find<BarContainer>();
+                _barDisplay = RootElement.Find<BarContainer>("MainContainer");
                 
-                Slider slider = RootElement.Find<Slider>();
+                Slider slider = RootElement.Find<Slider>("MaxValue");
                 slider.SliderPos += (_, v) =>
                 {
-                    _barDisplay.ChildLayout.MaxValue = v;
+                    _barDisplay.MaxValue = v;
                 };
             });
         }
@@ -72,7 +72,7 @@ namespace Sorting
             {
                 if (!_barDisplay.Children.AnimationsFinished) { return; }
                 
-                IElement f = _barDisplay.Hande.Focus;
+                IElement f = _barDisplay.Handle.Focus;
                 if (f is not Bar) { return; }
                 
                 _barDisplay.RemoveAt(f.Properties.ElementIndex);

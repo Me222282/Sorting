@@ -33,14 +33,32 @@ namespace Sorting
             }
         }
         
-        public double Value { get; set; }
+        private double _value;
+        public double Value
+        {
+            get => _value;
+            set => _value = Math.Clamp(value, 1d, MaxValue);
+        }
         public ColourF Colour { get; set; } = new ColourF(1f, 1f, 1f);
         public ColourF SelectColour { get; set; } = new ColourF(0.7f, 0.5f, 0.1f);
         public ColourF MoveColour { get; set; } = new ColourF(0.2f, 0.8f, 0.25f);
         
         public override GraphicsManager Graphics { get; }
-
-        public void Trig() => Hande.LayoutElement(this);
+        
+        private double MaxValue
+        {
+            get
+            {
+                if (Parent is null)
+                {
+                    return double.MaxValue;
+                }
+                
+                return ((BarContainer)Parent).MaxValue;
+            }
+        }
+        
+        public void Trig() => Handle.LayoutElement(this);
         
         protected override void OnScroll(ScrollEventArgs e)
         {
@@ -56,7 +74,7 @@ namespace Sorting
                 offset = 10d;
             }
             
-            Value = Math.Clamp(Value + (e.DeltaY * offset), 1d, Layout.MaxValue);
+            Value += e.DeltaY * offset;
         }
         
         protected override void OnKeyDown(KeyEventArgs e)
@@ -72,12 +90,12 @@ namespace Sorting
             
             if (e[Keys.Down])
             {
-                Value = Math.Clamp(Value - offset, 1d, Layout.MaxValue);
+                Value -= offset;
                 return;
             }
             if (e[Keys.Up])
             {
-                Value = Math.Clamp(Value + offset, 1d, Layout.MaxValue);
+                Value += offset;
                 return;
             }
         }
@@ -102,7 +120,7 @@ namespace Sorting
             //e.Context.Framebuffer.Clear(c);
             
             Vector2 size = Bounds.Size;
-            size.Y *= Math.Clamp(Value, 1d, Layout.MaxValue) / Layout.MaxValue;
+            size.Y *= Math.Clamp(_value, 1d, MaxValue) / MaxValue;
             if (size.Y < 1d)
             {
                 size.Y = 1d;
@@ -122,7 +140,7 @@ namespace Sorting
             
             e.TextRenderer.Colour = textColour;
             e.Context.Model = Matrix4.CreateBox(new Box((0d, y), _textSize));
-            e.TextRenderer.DrawCentred(e.Context, $"{Value:N0}", _font, 0, 0);
+            e.TextRenderer.DrawCentred(e.Context, $"{_value:N0}", _font, 0, 0);
             //e.TextRenderer.DrawCentred(e.Context, $"{CurrentIndex}", _font, 0, 0);
         }
     }
