@@ -39,7 +39,7 @@ namespace Sorting
             get => _value;
             set => _value = Math.Clamp(value, 1d, MaxValue);
         }
-        public ColourF Colour { get; set; } = new ColourF(1f, 1f, 1f);
+        public ColourF Colour { get; set; } = ColourF.White;
         public ColourF SelectColour { get; set; } = new ColourF(0.7f, 0.5f, 0.1f);
         public ColourF MoveColour { get; set; } = new ColourF(0.2f, 0.8f, 0.25f);
         
@@ -101,7 +101,7 @@ namespace Sorting
         }
         
         private const double _textSize = 20d;
-        private readonly Font _font = SampleFont.GetInstance();
+        private readonly Font _font = Shapes.SampleFont;
         private void OnRender(object sender, RenderArgs e)
         {
             ColourF c = Colour;

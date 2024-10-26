@@ -93,7 +93,7 @@ namespace Sorting
             set => SliderPosition = (value - MinValue) / (MaxValue - MinValue);
         }
         
-        private readonly Font _font = SampleFont.GetInstance();
+        private readonly Font _font = Shapes.SampleFont;
         public override GraphicsManager Graphics { get; }
 
         private const double _barHeight = 20d;
@@ -145,7 +145,7 @@ namespace Sorting
                 Focused ? SelectColour : BarColour,
                 0.2);
             
-            e.TextRenderer.Colour = new ColourF(1f, 1f, 1f);
+            e.TextRenderer.Colour = ColourF.White;
             e.Context.Model = Matrix4.CreateScale(15) * Matrix4.CreateTranslation(0, (_barHeight + 15) * -0.5);
             e.TextRenderer.DrawCentred(e.Context, $"{Value:N1}", _font, 0, 0);
         }
