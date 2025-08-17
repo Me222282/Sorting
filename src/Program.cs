@@ -33,7 +33,11 @@ namespace Sorting
             Actions.Push(() =>
             {
                 RootElement.ClearChildren();
+#if DEBUG
                 LoadXml(File.ReadAllText("Layouts/test.xml"));
+#else
+                test.LoadGUI(RootElement.Elements, this);
+#endif
                 
                 _barDisplay = RootElement.Find<BarContainer>("MainContainer");
                 
@@ -45,7 +49,7 @@ namespace Sorting
             });
         }
         
-        private void OnTextInput(object sender, string e)
+        internal void OnTextInput(object sender, string e)
         {
             if (!float.TryParse(e, out float v) ||
                 v <= 0f || _barDisplay.Children.Overflow)
@@ -80,19 +84,19 @@ namespace Sorting
             }
         }
         
-        private void BubbleSortButton(object sender, EventArgs e)
+        internal void BubbleSortButton(object sender, EventArgs e)
         {
             if (_barDisplay.Children.Overflow) { return; }
             
             _barDisplay.Children.BubbleSort(false);
         }
-        private void InsertionSortButton(object sender, EventArgs e)
+        internal void InsertionSortButton(object sender, EventArgs e)
         {
             if (_barDisplay.Children.Overflow) { return; }
             
             _barDisplay.Children.InsertionSort(false);
         }
-        private void Randomise(object sender, EventArgs e)
+        internal void Randomise(object sender, EventArgs e)
         {
             if (_barDisplay.Children.Overflow) { return; }
             

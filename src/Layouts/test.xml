@@ -7,9 +7,7 @@
             Position="Vector2(-0.65, 0.75)"
 			Padding="Vector2(10, 30)"
 			SilderWidth="150"
-			Value="100" >
-			
-		</Slider>
+			Value="100" />
 		
 		<Button Layout="TextLayout(10, 10, -0.25, 0.75, 0, 0, true)"
 			BorderWidth="2"
