@@ -37,7 +37,7 @@ namespace Sorting
         
         public event EventHandler<Vector2I> Finish;
         
-        public double GetIndex(int elementIndex)
+        public float GetIndex(int elementIndex)
         {
             if (!Animating)
             {
@@ -59,7 +59,7 @@ namespace Sorting
                 double t = Core.Time - _animationTime;
                 t *= _diff;
                 
-                return elementIndex - (t / AnimationTime);
+                return (float)(elementIndex - (t / AnimationTime));
             }
             
             if (elementIndex == _indexB)
@@ -67,7 +67,7 @@ namespace Sorting
                 double t = Core.Time - _animationTime;
                 t *= _diff;
                 
-                return elementIndex + (t / AnimationTime);
+                return (float)(elementIndex + (t / AnimationTime));
             }
             
             return elementIndex;

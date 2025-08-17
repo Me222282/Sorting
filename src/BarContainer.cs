@@ -15,11 +15,11 @@ namespace Sorting
             
             Graphics = new LocalGraphics(this, OnRender);
             Children = new ChildManager(this);
-            ChildLayout = new BarLayout(100d, 5d);
+            ChildLayout = new BarLayout(100f, 5f);
             LayoutManager = Zene.GUI.LayoutManager.Empty;
         }
         
-        public double MaxValue { get; set; } = 100d;
+        public float MaxValue { get; set; } = 100f;
         
         public BarLayout ChildLayout { get; }
         public override ChildManager Children { get; }
@@ -30,7 +30,7 @@ namespace Sorting
         public ColourF Colour { get; set; }
         public override GraphicsManager Graphics { get; }
         
-        public void AddValue(double value) => Children.Add(new Bar(value));
+        public void AddValue(float value) => Children.Add(new Bar(value));
         public void RemoveAt(int index) => Children.RemoveAt(index);
         
         protected override void OnUpdate(EventArgs e)
@@ -51,7 +51,7 @@ namespace Sorting
         
         private void OnRender(object sender, RenderArgs e)
         {
-            double radius = 10d / Math.Min(Bounds.Width, Bounds.Height);
+            float radius = 10f / Math.Min(Bounds.Width, Bounds.Height);
             e.Context.DrawRoundedBox(new Box(Vector2.Zero, Bounds.Size), Colour, radius);
         }
         

@@ -12,7 +12,7 @@ namespace Sorting
         {
             Graphics = new LocalGraphics(this, OnRender);
         }
-        public Bar(double value)
+        public Bar(float value)
             : this()
         {
             Value = value;
@@ -20,7 +20,7 @@ namespace Sorting
         
         public BarAnimator Animator { get; set; }
         
-        public double Index
+        public float Index
         {
             get
             {
@@ -33,11 +33,11 @@ namespace Sorting
             }
         }
         
-        private double _value;
-        public double Value
+        private float _value;
+        public float Value
         {
             get => _value;
-            set => _value = Math.Clamp(value, 1d, MaxValue);
+            set => _value = Math.Clamp(value, 1f, MaxValue);
         }
         public ColourF Colour { get; set; } = ColourF.White;
         public ColourF SelectColour { get; set; } = new ColourF(0.7f, 0.5f, 0.1f);
@@ -45,13 +45,13 @@ namespace Sorting
         
         public override GraphicsManager Graphics { get; }
         
-        private double MaxValue
+        private float MaxValue
         {
             get
             {
                 if (Parent is null)
                 {
-                    return double.MaxValue;
+                    return float.MaxValue;
                 }
                 
                 return ((BarContainer)Parent).MaxValue;
@@ -64,14 +64,14 @@ namespace Sorting
         {
             base.OnScroll(e);
             
-            double offset = 5d;
+            float offset = 5f;
             if (this[Mods.Shift])
             {
-                offset = 1d;
+                offset = 1f;
             }
             else if (this[Mods.Control])
             {
-                offset = 10d;
+                offset = 10f;
             }
             
             Value += e.DeltaY * offset;
@@ -81,11 +81,11 @@ namespace Sorting
         {
             base.OnKeyDown(e);
             
-            double offset = 5d;
+            float offset = 5f;
             
             if (e[Mods.Shift])
             {
-                offset = 1d;
+                offset = 1f;
             }
             
             if (e[Keys.Down])
@@ -100,7 +100,7 @@ namespace Sorting
             }
         }
         
-        private const double _textSize = 20d;
+        private const float _textSize = 20f;
         private readonly Font _font = Shapes.SampleFont;
         private void OnRender(object sender, RenderArgs e)
         {
@@ -120,26 +120,26 @@ namespace Sorting
             //e.Context.Framebuffer.Clear(c);
             
             Vector2 size = Bounds.Size;
-            size.Y *= Math.Clamp(_value, 1d, MaxValue) / MaxValue;
-            if (size.Y < 1d)
+            size.Y *= Math.Clamp(_value, 1f, MaxValue) / MaxValue;
+            if (size.Y < 1f)
             {
-                size.Y = 1d;
+                size.Y = 1f;
             }
             
             // ROUNDED CORNERS!
-            double radius = (0.1 * size.X) / Math.Min(size.X, size.Y);
-            double y = (size.Y - Bounds.Height) * 0.5;
-            e.Context.DrawRoundedBox(new Box((0d, y), size), c, radius);
+            float radius = (0.1f * size.X) / Math.Min(size.X, size.Y);
+            float y = (size.Y - Bounds.Height) * 0.5f;
+            e.Context.DrawRoundedBox(new Box((0f, y), size), c, radius);
             
             ColourF textColour = new ColourF(0f, 0f, 0f);
             if (size.Y <= _textSize)
             {
-                y += ((size.Y + _textSize) * 0.5) + 5d;
+                y += ((size.Y + _textSize) * 0.5f) + 5f;
                 textColour = new ColourF(1f, 1f, 1f);
             }
             
             e.TextRenderer.Colour = textColour;
-            e.Context.Model = Matrix4.CreateBox(new Box((0d, y), _textSize));
+            e.Context.Model = Matrix4.CreateBox(new Box((0f, y), _textSize));
             e.TextRenderer.DrawCentred(e.Context, $"{_value:N0}", _font, 0, 0);
             //e.TextRenderer.DrawCentred(e.Context, $"{CurrentIndex}", _font, 0, 0);
         }

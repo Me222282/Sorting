@@ -6,15 +6,15 @@ namespace Sorting
 {
     public class BarLayout : ILayout
     {
-        public BarLayout(double mv, double b)
+        public BarLayout(float mv, float b)
         {
             //MaxValue = mv;
             Border = b;
         }
         
         /*
-        private double _maxValue = 100d;
-        public double MaxValue
+        private float _maxValue = 100f;
+        public float MaxValue
         {
             get => _maxValue;
             set
@@ -27,8 +27,8 @@ namespace Sorting
             }
         }*/
         
-        private double _border = 5d;
-        public double Border
+        private float _border = 5f;
+        public float Border
         {
             get => _border;
             set
@@ -51,21 +51,21 @@ namespace Sorting
                 throw new ArgumentException(nameof(args.Element));
             }
             
-            double x = args.Size.X - _border;
+            float x = args.Size.X - _border;
             x /= args.Neighbours.Length;
             
-            double h = args.Size.Y - (2 * _border);
+            float h = args.Size.Y - (2f * _border);
             
-            Vector2 offset = (args.Size * 0.5);
+            Vector2 offset = (args.Size * 0.5f);
             
             Bar e = (Bar)args.Element;
             
-            double scale = 1d;//Math.Clamp(e.Value, 1d, MaxValue) / MaxValue;
+            float scale = 1f;//Math.Clamp(e.Value, 1f, MaxValue) / MaxValue;
             
             Vector2 pos = (_border + (x * e.Index), _border);
             Vector2 size = (x - _border, h * scale);
             
-            return new Box((pos - offset) + (size * 0.5), size);
+            return new Box((pos - offset) + (size * 0.5f), size);
         }
     }
 }

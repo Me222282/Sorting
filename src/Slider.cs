@@ -14,13 +14,13 @@ namespace Sorting
             Layout = this;
         }
         
-        private double _sliderPos;
-        public double SliderPosition
+        private float _sliderPos;
+        public float SliderPosition
         {
             get => _sliderPos;
             set
             {
-                _sliderPos = Math.Clamp(value, 0d, 1d);
+                _sliderPos = Math.Clamp(value, 0f, 1f);
                 
                 SliderPos?.Invoke(this, Value);
             }
@@ -71,8 +71,8 @@ namespace Sorting
             }
         }
         
-        private double _sliderWidth = 100d;
-        public double SilderWidth
+        private float _sliderWidth = 100f;
+        public float SilderWidth
         {
             get => _sliderWidth;
             set
@@ -85,9 +85,9 @@ namespace Sorting
             }
         }
         
-        public double MaxValue { get; set; }= 1000d;
-        public double MinValue { get; set; }= 50d;
-        public double Value
+        public float MaxValue { get; set; }= 1000f;
+        public float MinValue { get; set; }= 50f;
+        public float Value
         {
             get => MinValue.Lerp(MaxValue, _sliderPos);
             set => SliderPosition = (value - MinValue) / (MaxValue - MinValue);
@@ -96,11 +96,11 @@ namespace Sorting
         private readonly Font _font = Shapes.SampleFont;
         public override GraphicsManager Graphics { get; }
 
-        private const double _barHeight = 20d;
-        private const double _barWidth = 10d;
-        private const double _sliderHeight = 10d;
+        private const float _barHeight = 20f;
+        private const float _barWidth = 10f;
+        private const float _sliderHeight = 10f;
         
-        public event EventHandler<double> SliderPos;
+        public event EventHandler<float> SliderPos;
         
         public event EventHandler Change;
         public Box GetBounds(LayoutArgs args)
@@ -126,7 +126,7 @@ namespace Sorting
             
             if (Focused && _fromMouse)
             {
-                SliderPosition = (MouseLocation.X / _sliderWidth) + 0.5;
+                SliderPosition = (MouseLocation.X / _sliderWidth) + 0.5f;
             }
         }
         private void OnRender(object sender, RenderArgs e)
@@ -137,16 +137,16 @@ namespace Sorting
             e.Context.DrawRoundedBox(
                 new Box(Vector2.Zero, (_sliderWidth, _sliderHeight)),
                 SliderColour,
-                0.5);
+                0.5f);
             
             // BAR
             e.Context.DrawRoundedBox(
                 GetBar(),
                 Focused ? SelectColour : BarColour,
-                0.2);
+                0.2f);
             
             e.TextRenderer.Colour = ColourF.White;
-            e.Context.Model = Matrix4.CreateScale(15) * Matrix4.CreateTranslation(0, (_barHeight + 15) * -0.5);
+            e.Context.Model = Matrix4.CreateScale(15f) * Matrix4.CreateTranslation(0f, (_barHeight + 15f) * -0.5f);
             e.TextRenderer.DrawCentred(e.Context, $"{Value:N1}", _font, 0, 0);
         }
         
@@ -168,10 +168,10 @@ namespace Sorting
         {
             base.OnKeyDown(e);
             
-            double offset = 0.05;
+            float offset = 0.05f;
             if (e[Mods.Shift])
             {
-                offset = 0.01;
+                offset = 0.01f;
             }
             
             if (!_fromMouse && e[Keys.Left])

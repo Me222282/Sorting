@@ -21,7 +21,7 @@ namespace Sorting
         }
         
         public Program(int width, int height, string title)
-            : base(width, height, title, 4.3)
+            : base(width, height, title, 4.3f)
         {
             LoadGUI();
         }
@@ -47,8 +47,8 @@ namespace Sorting
         
         private void OnTextInput(object sender, string e)
         {
-            if (!double.TryParse(e, out double v) ||
-                v <= 0d || _barDisplay.Children.Overflow)
+            if (!float.TryParse(e, out float v) ||
+                v <= 0f || _barDisplay.Children.Overflow)
             {
                 return;
             }
